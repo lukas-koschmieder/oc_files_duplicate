@@ -11,6 +11,6 @@
   <dependencies>
     <owncloud min-version="9.0" />
   </dependencies>
-  <repository type="git">https://github.com/lukaskoschmieder/oc_files_duplicate/</repository>
+  <repository type="git">https://github.com/lukas-koschmieder/oc_files_duplicate/</repository>
   <ocsid></ocsid>
 </info>
