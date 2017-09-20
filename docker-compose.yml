@@ -1,0 +1,19 @@
+# Docker Compose file
+# (c) Lukas Koschmieder <lukas.koschmieder@rwth-aachen.de>
+
+version: '2'
+services:
+    core:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: oc_files_duplicate
+        container_name: oc_files_duplicate
+        entrypoint: bash /docker-entrypoint.sh
+        ports:
+            - "80:80"
+        environment:
+            - ADMIN_USER=admin
+            - ADMIN_PASS=admin
+        volumes:
+            - ./files_duplicate:/files_duplicate:ro
