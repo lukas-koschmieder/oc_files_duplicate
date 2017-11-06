@@ -37,14 +37,14 @@ class AppController extends Controller {
 			$dstNode = $srcNode = $this->userFolder->get($dstInternalPath);
 
 			$fileInfo = array(
-				'id' => $dstNode->getId(),
-				'name' => $dstNode->getName(),
-				'etag' => $dstNode->getEtag(),
-				'mimetype'=> $dstNode->getMimetype(),
-				'size'=> $dstNode->getSize(),
-				'mtime'=> $dstNode->getMtime(),
-				'type'=>$dstNode->getType(),
-				'permissions'=>$dstNode->getPermissions(),
+				'id'          => $dstNode->getId(),
+				'name'        => $dstNode->getName(),
+				'etag'        => $dstNode->getEtag(),
+				'mimetype'    => $dstNode->getMimetype(),
+				'size'        => $dstNode->getSize(),
+				'mtime'       => $dstNode->getMtime(),
+				'type'        => $dstNode->getType(),
+				'permissions' => $dstNode->getPermissions(),
 			);
 		} catch (NotPermittedException $exception) {
 			return array('success' => false, 'message' => 'Permission denied');
