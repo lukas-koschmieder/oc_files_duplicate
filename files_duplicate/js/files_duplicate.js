@@ -20,6 +20,7 @@ OCA.Files.fileActions.registerAction({
 	icon          : OC.imagePath('core', 'actions/add'),
 	actionHandler : function (fileName, fileObject) {
 		OC.dialogs.info("Duplicating " + fileName + ". Please wait...", "Duplicate", function() {}, true);
+
 		// Send duplicate request to PHP backend via HTTP POST
 		request = $.ajax({
 			type : "post",
@@ -31,6 +32,8 @@ OCA.Files.fileActions.registerAction({
 			$('.oc-dialog-content').each(function() { $(this).ocdialog('close'); }); // @TODO Close only above dialog
 			if(data.success) {
 				OC.Notification.showHtml(data.message, { timeout: 10 });
+				// Refresh view
+				FileList.add(data.info);
 			} else {
 				OC.dialogs.alert(data.message ? data.message : "Failed to duplicate file", 'Error', function() {}, true);
 			}
@@ -38,10 +41,6 @@ OCA.Files.fileActions.registerAction({
 		request.fail(function (jqXHR, textStatus, errorThrown) {
                         $('.oc-dialog-content').each(function() { $(this).ocdialog('close'); }); // @TODO Close only above dialog
 			OC.dialogs.alert('Failed to duplicate file: ' + errorThrown, 'Connection Failure', function() {}, true);
-		});
-		// Refresh view
-		request.complete(function () {
-			location.href = "#"; //@TODO Replace with soft refresh
 		});
 	}
 });

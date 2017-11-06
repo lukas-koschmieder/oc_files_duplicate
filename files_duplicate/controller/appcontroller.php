@@ -32,11 +32,28 @@ class AppController extends Controller {
 		$dstFullPath = $this->userFolder->getFullPath($dstInternalPath);
 
                 try {
-                    $srcNode->copy($dstFullPath);
+										#error_log("bla", 3, "/tmp/log");
+                    $dstNode = $srcNode->copy($dstFullPath);
+										$dstNode = $srcNode = $this->userFolder->get($dstInternalPath);
+										
+										//fileinfo=information of new file
+										$fileInfo = array(
+											'id' => $dstNode->getId(),
+											'name' => $dstNode->getName(),
+											'etag' => $dstNode->getEtag(),
+											'mimetype'=> $dstNode->getMimetype(),
+											'size'=> $dstNode->getSize(),
+											'mtime'=> $dstNode->getMtime(),
+											'type'=>$dstNode->getType(),
+											'permissions'=>$dstNode->getPermissions(),
+										);
                 } catch (NotPermittedException $exception) {
                     return array('success' => false, 'message' => 'Permission denied');
                 }
 
-		return array('success' => true, 'message' => 'File created: ' . $dstInternalPath);
+		return array('success' => true, 'message' => $dstInternalPath, 'info' => $fileInfo);
+						//$success= array('success' => true, 'message' => 'File created: ' . $dstInternalPath);
+						//$success[] = $success;
+		//return $success;
 	}
 }
