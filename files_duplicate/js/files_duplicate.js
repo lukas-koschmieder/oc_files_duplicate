@@ -39,7 +39,7 @@ OCA.Files.fileActions.registerAction({
 			}
 		});
 		request.fail(function (jqXHR, textStatus, errorThrown) {
-      $('.oc-dialog-content').each(function() { $(this).ocdialog('close'); }); // @TODO Close only above dialog
+			$('.oc-dialog-content').each(function() { $(this).ocdialog('close'); }); // @TODO Close only above dialog
 			OC.dialogs.alert('Failed to duplicate file: ' + errorThrown, 'Connection Failure', function() {}, true);
 		});
 	}

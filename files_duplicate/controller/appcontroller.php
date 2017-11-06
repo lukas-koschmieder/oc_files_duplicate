@@ -31,8 +31,8 @@ class AppController extends Controller {
 
 		$srcNode = $this->userFolder->get($srcInternalPath);
 		$dstFullPath = $this->userFolder->getFullPath($dstInternalPath);
-
-	  try {
+		
+		try {
 			$dstNode = $srcNode->copy($dstFullPath);
 			$dstNode = $srcNode = $this->userFolder->get($dstInternalPath);
 
@@ -46,10 +46,9 @@ class AppController extends Controller {
 				'type'=>$dstNode->getType(),
 				'permissions'=>$dstNode->getPermissions(),
 			);
-	  } catch (NotPermittedException $exception) {
+		} catch (NotPermittedException $exception) {
 			return array('success' => false, 'message' => 'Permission denied');
-	  }
-
+		}
 		return array('success' => true, 'message' => $dstInternalPath, 'info' => $fileInfo);
 	}
 }
