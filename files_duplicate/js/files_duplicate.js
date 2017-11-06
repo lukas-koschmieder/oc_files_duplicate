@@ -1,6 +1,7 @@
 /**
  * ownCloud - files_duplicate
  * @author Lukas Koschmieder <lukas.koschmieder@rwth-aachen.de>
+ * @author Alper Topaloglu <alper.topaloglu@iehk.rwth-aachen.de>
  * @copyright Lukas Koschmieder 2017
  */
 
@@ -32,14 +33,13 @@ OCA.Files.fileActions.registerAction({
 			$('.oc-dialog-content').each(function() { $(this).ocdialog('close'); }); // @TODO Close only above dialog
 			if(data.success) {
 				OC.Notification.showHtml(data.message, { timeout: 10 });
-				// Refresh view
-				FileList.add(data.info);
+				FileList.add(data.info); // Refresh view
 			} else {
 				OC.dialogs.alert(data.message ? data.message : "Failed to duplicate file", 'Error', function() {}, true);
 			}
 		});
 		request.fail(function (jqXHR, textStatus, errorThrown) {
-                        $('.oc-dialog-content').each(function() { $(this).ocdialog('close'); }); // @TODO Close only above dialog
+      $('.oc-dialog-content').each(function() { $(this).ocdialog('close'); }); // @TODO Close only above dialog
 			OC.dialogs.alert('Failed to duplicate file: ' + errorThrown, 'Connection Failure', function() {}, true);
 		});
 	}
